@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  rabbit:
+    hostname: 'rabbit'
+    image: rabbitmq:3.8.4-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: 'admin55'
+      RABBITMQ_DEFAULT_PASS: 'admin55'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - 'rabbitmq:/var/lib/rabbitmq'
+
+  mongo:
+    hostname: 'mongodb'
+    image: mongo
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo:/var/lib/mongodb
+
+volumes:
+  rabbitmq:
+    driver: local
+  mongo:
+    driver: local
